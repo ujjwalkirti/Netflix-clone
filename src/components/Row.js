@@ -10,7 +10,7 @@ function Row({ title, URLparams, isLargeRow }) {
     async function fetchData() {
       const request = await axios.get(`${URLbase}${URLparams}`);
       setMovies(request.data.results);
-      console.log(movies);
+      console.log(request.data.results);
       return request;
     }
     fetchData();
@@ -18,21 +18,23 @@ function Row({ title, URLparams, isLargeRow }) {
   return (
     <div className="row d-flex ml-5">
       <h2>{title}</h2>
-      {movies.map((movie) => {
+
+      {movies.map((movie) => (
         // const imageURL = `${URLbaseImage}${
         //   isLargeRow ? movie?.poster_path : movie?.backdrop_path
         // }`;
-        
+
+        <div className="card" style={{width:"18rem"}}>
           <img
+		  	className="card-img-top"
+            loading="lazy"
             src={`${URLbaseImage}${
-              isLargeRow ? movie?.poster_path : movie?.backdrop_path
+              isLargeRow ? movie.poster_path : movie.backdrop_path
             }`}
-            className="card-img-top"
             alt={movie?.original_title}
           />
-          
-        
-      })}
+        </div>
+      ))}
     </div>
   );
 }
