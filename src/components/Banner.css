@@ -1,19 +1,38 @@
 .banner {
-	position: relative;
-	height: 448px;
-	object-fit: contain;
+  position: relative;
+  height: 500px;
+  object-fit: contain;
+  color: white;
 }
-.banner__title {
-	font-size: 3rem;
-	font-weight: 800;
-	padding-bottom: 0.3 rem;
+.banner__contents {
+  margin: auto;
+}
+/* .banner__title {
+} */
+.left_gradient {
+  height: 500px;
+  background-image: linear-gradient(
+    to left,
+    transparent,
+    rgba(37, 37, 37, 0.61),
+    #111
+  );
+}
+.right_gradient {
+  height: 500px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    rgba(37, 37, 37, 0.61),
+    #111
+  );
 }
 .banner__fadeBottom {
-	height: 358px;
-	background-image: linear-gradient(
-		180deg,
-		transparent,
-		rgba(37, 37, 37, 0.61),
-		#111
-	);
+  height: 100%;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgba(37, 37, 37, 0.61),
+    #111
+  );
 }
