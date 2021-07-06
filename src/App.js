@@ -9,7 +9,7 @@ require("dotenv").config();
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Nav />
       <Banner />
       <Row title="Trending" URLparams={requests.fetchTrending} true />

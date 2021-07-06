@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "./Row.css";
 
 function Row({ title, URLparams, isLargeRow }) {
   const [movies, setMovies] = useState([]);
@@ -16,25 +17,20 @@ function Row({ title, URLparams, isLargeRow }) {
     fetchData();
   }, [URLparams]);
   return (
-    <div className="row d-flex ml-5">
+    <div className="ml-5 genre">
       <h2>{title}</h2>
-
-      {movies.map((movie) => (
-        // const imageURL = `${URLbaseImage}${
-        //   isLargeRow ? movie?.poster_path : movie?.backdrop_path
-        // }`;
-
-        <div className="card" style={{width:"18rem"}}>
+      <div className="d-flex row__movies">
+        {movies.map((movie) => (
           <img
-		  	className="card-img-top"
+            className={`row__movie {}`}
             loading="lazy"
             src={`${URLbaseImage}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
             }`}
             alt={movie?.original_title}
           />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

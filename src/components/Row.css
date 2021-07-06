@@ -1,0 +1,18 @@
+.genre {
+  color: white;
+}
+.row__movies {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+}
+
+.row__movies::-webkit-scrollbar {
+  display: none;
+}
+.row__movie {
+  margin: 0 10px;
+  width: 150px;
+  height: 150px;
+}
+
