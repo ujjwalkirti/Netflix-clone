@@ -22,7 +22,7 @@ function Row({ title, URLparams, isLargeRow }) {
       <div className="d-flex row__movies">
         {movies.map((movie) => (
           <img
-            className={`row__movie {}`}
+            className={`row__movie ${isLargeRow && "row__movielarge"}`}
             loading="lazy"
             src={`${URLbaseImage}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
