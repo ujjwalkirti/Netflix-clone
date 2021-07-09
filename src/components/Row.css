@@ -10,11 +10,34 @@
 .row__movies::-webkit-scrollbar {
   display: none;
 }
+.row__movies {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.genre__heading {
+  margin-top: 20px;
+  font-weight: 700;
+}
 .row__movie {
   margin: 0 10px;
-  width: 200px;
-  max-height: 230px;
+  width: 280px;
+  height: 200px;
 }
 .row__movielarge {
-  max-height: 400px;
+  height: 300px;
+  transition: width 1s ease, height 1s ease;
+}
+.row__movielarge:hover {
+  height: 325px;
+  width: 325px;
+}
+.noDisplay {
+  display: none;
+}
+.textDisplay {
+  display: relative;
+  font-weight: 600;
+}
+.row__moviehover {
+  opacity: 0.5;
 }

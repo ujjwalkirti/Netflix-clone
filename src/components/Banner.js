@@ -28,7 +28,7 @@ function Banner() {
     >
       {movie ? (
         <>
-          <div classname="row">
+          <div classname="row transparent">
             <div className="left_gradient col-6">
               <div className="banner__title ">
                 <h1 className="display-3">

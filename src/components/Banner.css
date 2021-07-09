@@ -1,6 +1,6 @@
 .banner {
   position: relative;
-  height: 500px;
+  height: 700px;
   object-fit: contain;
   color: white;
 }
@@ -10,11 +10,11 @@
 /* .banner__title {
 } */
 .left_gradient {
-  height: 500px;
+  height: 700px;
   background-image: linear-gradient(
     to left,
     transparent,
-    rgba(37, 37, 37, 0.61),
+    rgba(14, 11, 11, 0.91),
     #111
   );
 }
@@ -34,5 +34,17 @@
     transparent,
     rgba(37, 37, 37, 0.61),
     #111
+  );
+}
+.transparent {
+  width: 100%;
+  z-index: 1;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.8) 100%
   );
 }
