@@ -69,3 +69,39 @@
   bottom: 0px;
   z-index: 0;
 }
+.signup__center {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  color: white;
+  position: absolute;
+  border-radius: 10px;
+  top: 25%;
+  width: 50%;
+  right: 25%;
+  left: 30%;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.signup__center h2 {
+  font-weight: 800;
+  font-size: 4rem;
+  text-align: center;
+}
+.signup__center form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+.signup__center form input {
+  height: 50px;
+  margin-bottom: 20px;
+  padding: 5px;
+}
+.signup__center form button {
+  margin: auto;
+  padding: 5px;
+  height: 40px;
+  width: 50%;
+}

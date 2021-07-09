@@ -10,7 +10,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-function Nav() {
+function Nav(condition) {
   const [user, setUser] = useState(null);
   return (
     <div>
@@ -26,8 +26,14 @@ function Nav() {
         </Link>
         {!user ? (
           <span>
-            <Link className="btn btn-success mr-4">Login</Link>
-            <Link className="btn btn-primary">Sign-Up</Link>
+            {!condition ? (
+              <span></span>
+            ) : (
+              <>
+                <Link className="btn btn-success mr-4">Login</Link>
+                <Link className="btn btn-primary">Sign-Up</Link>
+              </>
+            )}
           </span>
         ) : (
           <span className="d-flex">
