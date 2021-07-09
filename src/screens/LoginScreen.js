@@ -32,7 +32,24 @@ function LoginScreen() {
         >
           <div className="login__gradientTop" />
           <Nav />
-          <LoginCenterContent />
+          <div className="login__center">
+            <h1>Unlimited movies, TV shows and more.</h1>
+            <h3>Watch anywhere. Cancel anytime.</h3>
+            <h4>
+              Ready to watch? Enter your email to create or restart your
+              membership.
+            </h4>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Email address"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              ></input>
+              <button className="login__centerbutton">Get Started</button>
+            </form>
+          </div>
           <div className="login__gradientDown" />
         </div>
       ) : (
