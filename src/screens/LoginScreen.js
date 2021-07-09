@@ -22,7 +22,7 @@ function LoginScreen() {
     event.preventDefault();
     setEmailEntered(true);
   }
-  console.log(backgroundImage);
+  
   return (
     <div className="login">
       {!user ? (
@@ -80,6 +80,7 @@ function LoginScreen() {
                 <input type="password" placeholder="Password" />
                 <button className="login__centerbutton">Sign In</button>
               </form>
+              <h4>New to Netflix? <Link>Sign-Up here</Link></h4>
             </div>
           )}
           <div className="login__gradientDown" />
