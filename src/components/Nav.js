@@ -20,18 +20,17 @@ function Nav(condition) {
             src="https://spng.pngfind.com/pngs/s/55-550764_netflix-n-logo-logo-n-de-netflix-hd.png"
             width="90"
             height="90"
-            class="d-inline-block align-top"
+            className="d-inline-block align-top"
             alt=""
           />
         </Link>
         {!user ? (
           <span>
-            {!condition ? (
+            {(condition === true) ? (
               <span></span>
             ) : (
               <>
-                <Link className="btn btn-success mr-4">Login</Link>
-                <Link className="btn btn-primary">Sign-Up</Link>
+                <Link to="/" className="btn btn-success mr-4">Login</Link>
               </>
             )}
           </span>

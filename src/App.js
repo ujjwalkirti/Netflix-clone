@@ -8,6 +8,7 @@ import Dashboard from "./screens/Dashboard";
 require("dotenv").config();
 
 function App() {
+  
   return (
   <Router>  
     <div className="app">
@@ -15,7 +16,7 @@ function App() {
         <Route exact path="/catalogue">
           <HomeScreen />
         </Route>
-        <Route path="/login">
+        <Route exact path="/">
           <LoginScreen/>
         </Route>
         <Route path="/dashboard">

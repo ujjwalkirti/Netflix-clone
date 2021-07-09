@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,10 +11,12 @@ import {
 import Nav from "../components/Nav";
 import "./LoginScreen.css";
 import backgroundImage from "../Static/netflix-background-9.webp";
+import { auth } from "../Firebase";
 
 function LoginScreen() {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
+  const password = useRef();
   const [emailEntered, setEmailEntered] = useState(false);
   const [alreadyOnLoginPage, setAlreadyOnLoginPage] = useState(false);
 
@@ -22,7 +24,28 @@ function LoginScreen() {
     event.preventDefault();
     setEmailEntered(true);
   }
-  
+  function login(event) {
+    event.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password.current.value)
+      .then((authUser) => {
+        console.log(authUser);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
+  function register(event) {
+    event.preventDefault();
+    auth
+      .createUserWithEmailAndPassword(email, password.current.value)
+      .then((authUser) => {
+        console.log(authUser);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
   return (
     <div className="login">
       {!user ? (
@@ -36,7 +59,7 @@ function LoginScreen() {
           className="login__form"
         >
           <div className="login__gradientTop" />
-          <Nav {...alreadyOnLoginPage} />
+          <Nav condition={alreadyOnLoginPage} />
           {!emailEntered ? (
             <div className="login__center">
               <h1>Unlimited movies, TV shows and more.</h1>
@@ -73,14 +96,27 @@ function LoginScreen() {
                   type="email"
                   placeholder={`Email address` && email === ""}
                   value={email}
+                  required
                   onchange={(event) => {
                     setEmail(event.target.value);
                   }}
                 />
-                <input type="password" placeholder="Password" />
-                <button className="login__centerbutton">Sign In</button>
+                <input
+                  type="password"
+                  required
+                  ref={password}
+                  placeholder="Password"
+                />
+                <button onClick={login} className="login__centerbutton">
+                  Sign In
+                </button>
               </form>
-              <h4>New to Netflix? <Link>Sign-Up here</Link></h4>
+              <h4>
+                New to Netflix?{" "}
+                <span className="signup" onClick={register}>
+                  Sign-Up here
+                </span>
+              </h4>
             </div>
           )}
           <div className="login__gradientDown" />
