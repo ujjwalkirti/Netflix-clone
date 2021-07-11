@@ -11,7 +11,6 @@ function Row({ title, URLparams, isLargeRow }) {
     async function fetchData() {
       const request = await axios.get(`${URLbase}${URLparams}`);
       setMovies(request.data.results);
-      console.log(request.data.results);
       return request;
     }
     fetchData();
@@ -40,7 +39,7 @@ function Row({ title, URLparams, isLargeRow }) {
                   onMouseEnter={() => {
                     // setIsHovered(true);
                     isHovered = true;
-                    
+
                     //show the name of the movie and blurr the background a bit
                   }}
                   onMouseLeave={() => {

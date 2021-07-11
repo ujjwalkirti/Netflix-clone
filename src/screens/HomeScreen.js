@@ -1,12 +1,11 @@
 import React from "react";
 import Banner from "../components/Banner";
-import Nav from "../components/Nav";
 import requests from "../components/Requests";
 import Row from "../components/Row";
 
 function HomeScreen() {
   return (
-    <div className="">
+    <div >
       <Banner />
       <Row
         title="Trending"

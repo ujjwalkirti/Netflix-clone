@@ -12,7 +12,6 @@ function Banner() {
         `https://api.themoviedb.org/3${requests.fetchNetflixOriginals}`
       );
       const rand = Math.floor(Math.random() * response.data.results.length - 1);
-      console.log(response.data.results[rand]);
       setMovie(response.data.results[rand]);
     }
     fetchMovies();

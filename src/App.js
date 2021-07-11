@@ -25,7 +25,7 @@ function App() {
           );
         } else {
           dispatch(logout());
-          console.log("LOGGED OUT")
+          console.log("LOGGED OUT");
         }
       });
     };
@@ -35,11 +35,11 @@ function App() {
     <Router>
       <div className="app">
         <Switch>
-          <Route exact path="/catalogue">
-            <HomeScreen />
-          </Route>
           <Route exact path="/">
             <LoginScreen />
+          </Route>
+          <Route path="/catalogue">
+            <HomeScreen />
           </Route>
           <Route path="/dashboard">
             <Dashboard />

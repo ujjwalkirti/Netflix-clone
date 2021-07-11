@@ -17,6 +17,7 @@ import { selectUser } from "../features/userSlice";
 
 function LoginScreen() {
   const user = useSelector(selectUser);
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const passwordRef = useRef();
   const [emailEntered, setEmailEntered] = useState(false);
@@ -30,9 +31,7 @@ function LoginScreen() {
     event.preventDefault();
     auth
       .signInWithEmailAndPassword(email, passwordRef.current.value)
-      .then((authUser) => {
-        console.log(authUser);
-      })
+      .then((authUser) => {})
       .catch((error) => {
         alert(error);
       });
@@ -41,16 +40,18 @@ function LoginScreen() {
     event.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, passwordRef.current.value)
-      .then((authUser) => {
-        console.log(authUser);
-      })
+      .then((authUser) => {})
       .catch((error) => {
         alert(error);
       });
   }
+  // function redirectToProfile(event){
+  //   event.preventDefault();
+  //   history.push("/dashboard")
+  // }
   return (
     <div className="login">
-      {(user == null) ? (
+      {user === null ? (
         <div
           style={{
             backgroundSize: "100% 100%",
@@ -124,13 +125,7 @@ function LoginScreen() {
           <div className="login__gradientDown" />
         </div>
       ) : (
-        <div>
-          <Redirect
-            to={{
-              pathname: "/catalogue",
-            }}
-          />
-        </div>
+        <Redirect to="/catalogue" />
       )}
     </div>
   );

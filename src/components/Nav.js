@@ -22,7 +22,7 @@ function Nav(condition) {
     auth
       .signOut()
       .then(() => {
-        history.push("/");
+        return <Redirect to="/" />;
       })
       .catch((err) => {
         alert(err);
@@ -33,9 +33,9 @@ function Nav(condition) {
       <nav class="navbar">
         <Link class="navbar-brand" to={user ? `/catalogue` : `/`}>
           <img
-            src="https://spng.pngfind.com/pngs/s/55-550764_netflix-n-logo-logo-n-de-netflix-hd.png"
-            width="90"
-            height="90"
+            src="https://pngimg.com/uploads/netflix/netflix_PNG15.png"
+            width="65"
+            height="105"
             className="d-inline-block align-top"
             alt=""
           />
@@ -57,6 +57,7 @@ function Nav(condition) {
             <img
               src={userAvatar}
               alt=""
+              style={{ borderRadius: "50%" }}
               onClick={() => {
                 history.push("/dashboard");
               }}

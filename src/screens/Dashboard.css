@@ -1,0 +1,25 @@
+.dashboard__center {
+  display: flex;
+  color: white;
+  background-color: rgb(41, 35, 35);
+  width: fit-content;
+  margin: auto;
+  height: 100vh;
+}
+/* .dashboard__left{
+
+} */
+.dashboard__left img {
+  height: 150px;
+  width: 150px;
+  margin-right: 30px;
+  border-right: 3px solid white;
+}
+.dashboard__right {
+  margin: 30px;
+}
+.dashboard__right h3{
+    background-color: gray;
+    padding:5px;
+
+}
