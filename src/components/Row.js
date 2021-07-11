@@ -22,7 +22,6 @@ function Row({ title, URLparams, isLargeRow }) {
       <div className="d-flex row__movies">
         {movies.map((movie) => {
           const id = movie.id;
-          console.log(movie.id);
           let isHovered = false;
           if (typeof movie.backdrop_path !== "undefined") {
             return (

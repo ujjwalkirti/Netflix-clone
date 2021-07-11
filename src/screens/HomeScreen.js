@@ -7,7 +7,6 @@ import Row from "../components/Row";
 function HomeScreen() {
   return (
     <div className="">
-      <Nav />
       <Banner />
       <Row
         title="Trending"

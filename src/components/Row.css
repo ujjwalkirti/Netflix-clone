@@ -25,11 +25,11 @@
 }
 .row__movielarge {
   height: 300px;
-  transition: width 1s ease, height 1s ease;
+  transition: transform 450ms;
 }
 .row__movielarge:hover {
-  height: 325px;
-  width: 325px;
+  transform: scale(1.08);
+  opacity: 1;
 }
 .noDisplay {
   display: none;

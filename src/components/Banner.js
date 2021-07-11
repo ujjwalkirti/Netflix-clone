@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import "./Banner.css";
+import Nav from "./Nav";
 import requests from "./Requests";
 function Banner() {
   const [movie, setMovie] = useState([]);
@@ -26,25 +27,23 @@ function Banner() {
       }}
       className="banner"
     >
+      <div className="login__gradientTop" />
+      <Nav />
       {movie ? (
         <>
-          <div classname="row transparent">
-            <div className="left_gradient col-6">
-              <div className="banner__title ">
-                <h1 className="display-3">
-                  {movie?.title || movie?.original_name || movie?.name}
-                </h1>
-              </div>
-              <div className="banner__buttons">
-                <button className="btn btn-dark mr-3">Play</button>
-                <button className="btn btn-dark">My List</button>
-              </div>
-              <div className="banner__description mt-2">
-                <h3>{movie?.overview}</h3>
-              </div>
+          <div className="transparent">
+            <div className="banner__title">
+              <h1 className="display-3">
+                {movie?.title || movie?.original_name || movie?.name}
+              </h1>
             </div>
-            <div className="banner__contents  col-6"></div>
-            {/* <div className="right_gradient col-2"></div> */}
+            <div className="banner__buttons">
+              <button className="btn btn-dark mr-3">Play</button>
+              <button className="btn btn-dark">My List</button>
+            </div>
+            <div className="banner__description mt-2">
+              <h3>{movie?.overview}</h3>
+            </div>
           </div>
         </>
       ) : (
@@ -52,6 +51,7 @@ function Banner() {
           <span class="sr-only">Loading...</span>
         </div>
       )}
+      <div className="login__gradientDown" />
     </div>
   );
 }

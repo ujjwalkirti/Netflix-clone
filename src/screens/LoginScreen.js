@@ -12,11 +12,13 @@ import Nav from "../components/Nav";
 import "./LoginScreen.css";
 import backgroundImage from "../Static/netflix-background-9.webp";
 import { auth } from "../Firebase";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 function LoginScreen() {
-  const [user, setUser] = useState(null);
+  const user = useSelector(selectUser);
   const [email, setEmail] = useState("");
-  const password = useRef();
+  const passwordRef = useRef();
   const [emailEntered, setEmailEntered] = useState(false);
   const [alreadyOnLoginPage, setAlreadyOnLoginPage] = useState(false);
 
@@ -27,7 +29,7 @@ function LoginScreen() {
   function login(event) {
     event.preventDefault();
     auth
-      .signInWithEmailAndPassword(email, password.current.value)
+      .signInWithEmailAndPassword(email, passwordRef.current.value)
       .then((authUser) => {
         console.log(authUser);
       })
@@ -38,7 +40,7 @@ function LoginScreen() {
   function register(event) {
     event.preventDefault();
     auth
-      .createUserWithEmailAndPassword(email, password.current.value)
+      .createUserWithEmailAndPassword(email, passwordRef.current.value)
       .then((authUser) => {
         console.log(authUser);
       })
@@ -48,7 +50,7 @@ function LoginScreen() {
   }
   return (
     <div className="login">
-      {!user ? (
+      {(user == null) ? (
         <div
           style={{
             backgroundSize: "100% 100%",
@@ -104,7 +106,7 @@ function LoginScreen() {
                 <input
                   type="password"
                   required
-                  ref={password}
+                  ref={passwordRef}
                   placeholder="Password"
                 />
                 <button onClick={login} className="login__centerbutton">
@@ -113,7 +115,7 @@ function LoginScreen() {
               </form>
               <h4>
                 New to Netflix?{" "}
-                <span className="signup" onClick={register}>
+                <span className="signup__buttonText" onClick={register}>
                   Sign-Up here
                 </span>
               </h4>
@@ -125,7 +127,7 @@ function LoginScreen() {
         <div>
           <Redirect
             to={{
-              pathname: "/dashboard",
+              pathname: "/catalogue",
             }}
           />
         </div>
