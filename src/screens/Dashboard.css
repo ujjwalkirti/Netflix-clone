@@ -1,10 +1,31 @@
-.dashboard__center {
-  display: flex;
+.dashboard {
   color: white;
-  background-color: rgb(41, 35, 35);
+  height: 100vh;
+}
+.dashboard__heading h2 {
+  text-align: center;
+  font-weight: 900;
+}
+.dashboard__heading {
+  border-bottom: 2px solid gray;
   width: fit-content;
   margin: auto;
-  height: 100vh;
+}
+.dashboard__signout {
+  border: none;
+  cursor: pointer;
+  background-color: #e50914;
+  color: white;
+  width: fit-content;
+  margin: 20px auto;
+  font-weight: 700;
+  height: fit-content;
+}
+.dashboard__center {
+  display: flex;
+
+  width: fit-content;
+  margin: auto;
 }
 /* .dashboard__left{
 
@@ -13,13 +34,43 @@
   height: 150px;
   width: 150px;
   margin-right: 30px;
-  border-right: 3px solid white;
+  padding: 15px;
 }
 .dashboard__right {
   margin: 30px;
+  display: flex;
+  flex-direction: column;
 }
-.dashboard__right h3{
-    background-color: gray;
-    padding:5px;
+.dashboard__right h3 {
+  background-color: gray;
+  padding: 15px;
+  font-size: large;
+}
 
+.plan__name {
+  background-color: cadetblue;
+  /* height: 100px;
+  width: 100px; */
+  text-align: center;
+}
+table {
+  empty-cells: show;
+  width: 80%;
+  margin: auto;
+}
+th {
+  empty-cells: show;
+  height: 200px;
+  width: 200px;
+}
+td{
+  empty-cells: show;
+  height: 200px;
+  width: 200px;
+
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
 }

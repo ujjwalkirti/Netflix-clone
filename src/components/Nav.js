@@ -22,7 +22,7 @@ function Nav(condition) {
     auth
       .signOut()
       .then(() => {
-        return <Redirect to="/" />;
+        history.push('/')
       })
       .catch((err) => {
         alert(err);

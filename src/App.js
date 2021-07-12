@@ -7,6 +7,7 @@ import Dashboard from "./screens/Dashboard";
 import { auth } from "./Firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/userSlice";
+import PayForPlans from "./components/PayForPlans";
 require("dotenv").config();
 
 function App() {
@@ -38,11 +39,20 @@ function App() {
           <Route exact path="/">
             <LoginScreen />
           </Route>
-          <Route path="/catalogue">
+          <Route exact path="/catalogue">
             <HomeScreen />
           </Route>
-          <Route path="/dashboard">
+          <Route exact path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route exact path="/plans/premium">
+            <PayForPlans typeOfPlan="Premium" />
+          </Route>
+          <Route exact path="/s/standard">
+            <PayForPlans typeOfPlan="Standard" />
+          </Route>
+          <Route exact path="/plans/basic">
+            <PayForPlans typeOfPlan="Basic" />
           </Route>
         </Switch>
       </div>

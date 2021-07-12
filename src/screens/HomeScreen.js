@@ -1,49 +1,57 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import Banner from "../components/Banner";
 import requests from "../components/Requests";
 import Row from "../components/Row";
+import { selectUser } from "../features/userSlice";
 
 function HomeScreen() {
-  return (
-    <div >
-      <Banner />
-      <Row
-        title="Trending"
-        URLparams={requests.fetchTrending}
-        isLargeRow={true}
-      />
-      <Row
-        title="Top Rated"
-        URLparams={requests.fetchTopRated}
-        isLargeRow={false}
-      />
-      <Row
-        title="Action"
-        URLparams={requests.fetchActionMovies}
-        isLargeRow={false}
-      />
-      <Row
-        title="Comedy"
-        URLparams={requests.fetchComedyMovies}
-        isLargeRow={false}
-      />
-      <Row
-        title="Horror"
-        URLparams={requests.fetchHorrorMovies}
-        isLargeRow={false}
-      />
-      <Row
-        title="Romance"
-        URLparams={requests.fetchRomanceMovies}
-        isLargeRow={false}
-      />
-      <Row
-        title="Documentaries"
-        URLparams={requests.fetchDocumentaries}
-        false
-      />
-    </div>
-  );
+  const user = useSelector(selectUser);
+  if (user === null) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <div>
+        <Banner />
+        <Row
+          title="Trending"
+          URLparams={requests.fetchTrending}
+          isLargeRow={true}
+        />
+        <Row
+          title="Top Rated"
+          URLparams={requests.fetchTopRated}
+          isLargeRow={false}
+        />
+        <Row
+          title="Action"
+          URLparams={requests.fetchActionMovies}
+          isLargeRow={false}
+        />
+        <Row
+          title="Comedy"
+          URLparams={requests.fetchComedyMovies}
+          isLargeRow={false}
+        />
+        <Row
+          title="Horror"
+          URLparams={requests.fetchHorrorMovies}
+          isLargeRow={false}
+        />
+        <Row
+          title="Romance"
+          URLparams={requests.fetchRomanceMovies}
+          isLargeRow={false}
+        />
+        <Row
+          title="Documentaries"
+          URLparams={requests.fetchDocumentaries}
+          false
+        />
+      </div>
+    );
+  }
 }
 
 export default HomeScreen;
