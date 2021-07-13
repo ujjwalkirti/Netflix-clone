@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import Nav from "../components/Nav";
 import { selectUser } from "../features/userSlice";
+import db from "../Firebase";
 import userAvatar from "../Static/Avatars/6.png";
 import "./Dashboard.css";
 
@@ -13,7 +14,28 @@ function Dashboard() {
   const [priceBasic, setPriceBasic] = useState("7.99");
   const [priceStandard, setPriceStandard] = useState("9.99");
   const [pricePremium, setPricePremium] = useState("11.99");
+  const [storeUser, setStoreUser] = useState({ firstName: "", lastName: "" });
   const history = useHistory();
+
+  useEffect(() => {
+    async function userData() {
+      var docRef = db.collection("users").doc(user?.uid);
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setStoreUser(doc.data());
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+    }
+    userData();
+  }, [user]);
 
   {
     if (user === null) {
@@ -40,7 +62,7 @@ function Dashboard() {
                   <img src={userAvatar} alt={user?.email} />
                 </div>
                 <div className="dashboard__right">
-                  <h3 className="dashboard__useremail">Hi, {user?.email}</h3>
+                  <h3 className="dashboard__useremail">Hi, {storeUser?.firstName}</h3>
                   <button
                     onClick={() => {
                       setEditDetails(true);
@@ -62,11 +84,60 @@ function Dashboard() {
             </div>
           )}
           {editDetails && !selectPlan && (
-            <div className="wrapper__details">
-              <h2>
-                You can edit your details over here, we are building this right
-                now!
-              </h2>
+            <div className="wrapper__details signup__center">
+              <h2>Edit your details</h2>
+              <form
+                action=""
+                style={{ border: "1px solid gray", padding: "20px" }}
+              >
+                <label htmlFor="fn">First Name</label>
+                <input
+                  type="text"
+                  name=""
+                  id="fn"
+                  value={storeUser.firstName}
+                  onChange={(event) => {
+                    setStoreUser({
+                      firstName: event.target.value,
+                      lastName: storeUser.lastName,
+                    });
+                  }}
+                />
+                <label htmlFor="ln">Last Name</label>
+                <input
+                  type="text"
+                  name=""
+                  id="ln"
+                  value={storeUser.lastName}
+                  onChange={(event) => {
+                    setStoreUser({
+                      lastName: event.target.value,
+                      firstName: storeUser.firstName,
+                    });
+                  }}
+                />
+                <button
+                  type="submit"
+                  onClick={async (event) => {
+                    event.preventDefault();
+                    try {
+                      await db.collection("users").doc(user?.uid).update({
+                        firstName: storeUser.firstName,
+                        lastName: storeUser.lastName,
+                      });
+                      console.log("Document successfully updated!");
+                      history.push("/dashboard");
+                      setEditDetails(false);
+                    } catch (error) {
+                      // The document probably doesn't exist.
+                      console.error("Error updating document: ", error);
+                    }
+                  }}
+                  className="dashboard__signout"
+                >
+                  Submit
+                </button>
+              </form>
               <button
                 onClick={() => {
                   setEditDetails(false);
@@ -129,9 +200,9 @@ function Dashboard() {
                   <td className="criteria__header">
                     Screens you can watch on at the same time
                   </td>
-                  <td>1</td>
-                  <td>2</td>
                   <td>3</td>
+                  <td>2</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td className="criteria__header">
