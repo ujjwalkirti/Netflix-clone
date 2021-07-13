@@ -48,7 +48,7 @@ function App() {
           <Route exact path="/plans/premium">
             <PayForPlans typeOfPlan="Premium" />
           </Route>
-          <Route exact path="/s/standard">
+          <Route exact path="/plans/standard">
             <PayForPlans typeOfPlan="Standard" />
           </Route>
           <Route exact path="/plans/basic">

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Nav from "./Nav";
 import "./PayForPlans.css";
+import footerImage from "../Static/ad/80633824.jpg";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 function PayForPlans(typeOfPlan) {
@@ -34,6 +35,7 @@ function PayForPlans(typeOfPlan) {
           />
         </div>
       </span>
+      <img className="footer__image" src={footerImage} alt="" />
     </div>
   );
 }

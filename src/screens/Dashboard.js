@@ -10,7 +10,7 @@ function Dashboard() {
   const user = useSelector(selectUser);
   const [editDetails, setEditDetails] = useState(false);
   const [selectPlan, setSelectPlan] = useState(false);
-  const [priceBasic,setPriceBasic] = useState('7.99');
+  const [priceBasic, setPriceBasic] = useState("7.99");
   const [priceStandard, setPriceStandard] = useState("9.99");
   const [pricePremium, setPricePremium] = useState("11.99");
   const history = useHistory();
@@ -84,55 +84,76 @@ function Dashboard() {
               <table className="plan__table">
                 <tr>
                   <th className="criteria__header"></th>
-                  <th className="plan__name">Premium</th>
+                  <th
+                    onClick={() => {
+                      history.push("/plans/premium");
+                    }}
+                    className="plan__name"
+                  >
+                    Premium
+                  </th>
 
-                  <th className="plan__name">Standard</th>
+                  <th
+                    onClick={() => {
+                      history.push("/plans/standard");
+                    }}
+                    className="plan__name"
+                  >
+                    Standard
+                  </th>
 
-                  <th className="plan__name">Basic</th>
+                  <th
+                    onClick={() => {
+                      history.push("/plans/basic");
+                    }}
+                    className="plan__name"
+                  >
+                    Basic
+                  </th>
                 </tr>
                 <tr>
-                  <td>Monthly price after free month ends</td>
+                  <td className="criteria__header">
+                    Monthly price after free month ends
+                  </td>
                   <td>$ {pricePremium}</td>
                   <td>$ {priceStandard}</td>
                   <td>$ {priceBasic}</td>
                 </tr>
                 <tr>
-                  <td>HD available</td>
-                  <td></td>
+                  <td className="criteria__header">HD available</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>❌</td>
                 </tr>
                 <tr>
-                  <td>
-                    <button
-                      className="dashboard__signout"
-                      onClick={() => {
-                        history.push("/plans/premium");
-                      }}
-                      className="dashboard__signout"
-                    >
-                      Select
-                    </button>
+                  <td className="criteria__header">
+                    Screens you can watch on at the same time
                   </td>
-                  <td>
-                    <button
-                      className="dashboard__signout"
-                      onClick={() => {
-                        history.push("/plans/standard");
-                      }}
-                      className="dashboard__signout"
-                    >
-                      Select
-                    </button>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td className="criteria__header">
+                    Watch on your laptop, TV, phone and tablet
                   </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        history.push("/plans/basic");
-                      }}
-                      className="dashboard__signout"
-                    >
-                      Select
-                    </button>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td className="criteria__header">
+                    Unlimited movies and TV shows
                   </td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td className="criteria__header">Cancel anytime</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
                 </tr>
               </table>
 

@@ -34,8 +34,8 @@ function Nav(condition) {
         <Link class="navbar-brand" to={user ? `/catalogue` : `/`}>
           <img
             src="https://pngimg.com/uploads/netflix/netflix_PNG15.png"
-            width="65"
-            height="105"
+            width="35"
+            height="75"
             className="d-inline-block align-top"
             alt=""
           />
