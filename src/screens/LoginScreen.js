@@ -11,7 +11,7 @@ import {
 import Nav from "../components/Nav";
 import "./LoginScreen.css";
 import backgroundImage from "../Static/netflix-background-9.webp";
-import { auth } from "../Firebase";
+import db, { auth } from "../Firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 
@@ -19,7 +19,10 @@ function LoginScreen() {
   const user = useSelector(selectUser);
   const history = useHistory();
   const [email, setEmail] = useState("");
+  const [newUser, setNewUser] = useState(false);
   const passwordRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
   const [emailEntered, setEmailEntered] = useState(false);
   const [alreadyOnLoginPage, setAlreadyOnLoginPage] = useState(false);
 
@@ -40,7 +43,14 @@ function LoginScreen() {
     event.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, passwordRef.current.value)
-      .then((authUser) => {})
+      .then((authUser) => {
+        db.collection("users").doc(authUser.user.uid).set({
+          email: authUser.user.email,
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          selectedPlan: "None",
+        });
+      })
       .catch((error) => {
         alert(error);
       });
@@ -63,7 +73,7 @@ function LoginScreen() {
         >
           <div className="login__gradientTop" />
           <Nav condition={alreadyOnLoginPage} />
-          {!emailEntered ? (
+          {!emailEntered && !newUser ? (
             <div className="login__center">
               <h1>Unlimited movies, TV shows and more.</h1>
               <h3>Watch anywhere. Cancel anytime.</h3>
@@ -91,7 +101,7 @@ function LoginScreen() {
                 </button>
               </form>
             </div>
-          ) : (
+          ) : !newUser ? (
             <div className="signup__center">
               <h2>Sign-In</h2>
               <form>
@@ -116,10 +126,52 @@ function LoginScreen() {
               </form>
               <h4>
                 New to Netflix?{" "}
-                <span className="signup__buttonText" onClick={register}>
+                <span
+                  className="signup__buttonText"
+                  onClick={() => {
+                    setNewUser(true);
+                  }}
+                >
                   Sign-Up here
                 </span>
               </h4>
+            </div>
+          ) : (
+            <div className="signup__center">
+              <h2>Sign-In</h2>
+              <form>
+                <input
+                  type="email"
+                  value={email}
+                  required
+                  onchange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+                />
+                <input
+                  type="text"
+                  ref={firstNameRef}
+                  name=""
+                  id=""
+                  placeholder="First Name"
+                />
+                <input
+                  type="text"
+                  ref={lastNameRef}
+                  name=""
+                  id=""
+                  placeholder="Last Name"
+                />
+                <input
+                  type="password"
+                  required
+                  ref={passwordRef}
+                  placeholder="Password"
+                />
+                <button onClick={register} className="login__centerbutton">
+                  Sign Up
+                </button>
+              </form>
             </div>
           )}
           <div className="login__gradientDown" />
