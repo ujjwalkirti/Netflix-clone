@@ -1,11 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
+import db from "../Firebase";
+import firebase from "firebase";
 
 import "./Banner.css";
 import Nav from "./Nav";
 import requests from "./Requests";
 function Banner() {
   const [movie, setMovie] = useState([]);
+  const user = useSelector(selectUser);
   useEffect(() => {
     async function fetchMovies() {
       const response = await axios.get(
@@ -16,6 +21,16 @@ function Banner() {
     }
     fetchMovies();
   }, []);
+
+  const addToList = (event) => {
+    event.preventDefault();
+    db.collection("users")
+      .doc(user?.uid)
+      .update({
+        movieList: firebase.firestore.FieldValue.arrayUnion(movie),
+      });
+  };
+
   return (
     <div
       style={{
@@ -38,7 +53,9 @@ function Banner() {
             </div>
             <div className="banner__buttons">
               <button className="btn btn-dark mr-3">Play</button>
-              <button className="btn btn-dark">My List</button>
+              <button className="btn btn-dark" onClick={addToList}>
+                My List
+              </button>
             </div>
             <div className="banner__description mt-2">
               <h3>{movie?.overview}</h3>

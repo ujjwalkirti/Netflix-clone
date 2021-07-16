@@ -187,7 +187,7 @@ function Dashboard() {
                     Monthly price after free month ends
                   </td>
                   {plans.map((plan) => (
-                    <td>{plan.price}</td>
+                    <td>$ {plan.price}</td>
                   ))}
                 </tr>
                 <tr>

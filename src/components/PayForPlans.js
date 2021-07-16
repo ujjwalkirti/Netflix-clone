@@ -14,6 +14,7 @@ function PayForPlans({ typeOfPlan }) {
   const user = useSelector(selectUser);
   const history = useHistory();
   const [tempPlan, setTempPlan] = useState({});
+
   useEffect(() => {
     plans.map((plan) => {
       if (plan.name === typeOfPlan) {
@@ -36,16 +37,17 @@ function PayForPlans({ typeOfPlan }) {
   };
   const onApprove = async (data, actions) => {
     // console.log(data);
-    
+
     return actions.order
       .capture()
       .then((details) => {
-        console.log(details)
-        if(details.status === "COMPLETED"){
+        // console.log(details)
+        if (details.status === "COMPLETED") {
           db.collection("users").doc(user?.uid).update({
-            selectedPlan : tempPlan.name,
-          })
-        };
+            selectedPlan: tempPlan.name,
+          });
+          history.push("/dashboard");
+        }
       })
       .catch((error) => {
         console.log(error);
