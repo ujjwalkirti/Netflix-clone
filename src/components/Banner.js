@@ -22,6 +22,31 @@ function Banner() {
     fetchMovies();
   }, []);
 
+  const playNow = (event) => {
+    event.preventDefault();
+    //allow users to play a movie only if they are subscribed to any plan
+    db.collection("users")
+      .doc(user?.uid)
+      .get()
+      .then((doc) => {
+        if (doc.data().selectedPlan !== "None") {
+          db.collection("users")
+            .doc(user?.uid)
+            .update({
+              wantToWatch: movie,
+            })
+            .then(() => {
+              console.log(
+                "You are watching ",
+                movie?.title || movie?.original_name || movie?.name
+              );
+            });
+        } else {
+          alert("You have not subscribed to any plan!");
+        }
+      });
+  };
+  
   const addToList = (event) => {
     event.preventDefault();
     db.collection("users")
@@ -52,7 +77,9 @@ function Banner() {
               </h1>
             </div>
             <div className="banner__buttons">
-              <button className="btn btn-dark mr-3">Play</button>
+              <button className="btn btn-dark mr-3" onClick={playNow}>
+                Play
+              </button>
               <button className="btn btn-dark" onClick={addToList}>
                 My List
               </button>

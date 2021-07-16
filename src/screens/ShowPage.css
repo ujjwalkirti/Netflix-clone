@@ -1,0 +1,10 @@
+.dashboard__signout {
+  border: none;
+  cursor: pointer;
+  background-color: #e50914;
+  color: white;
+  width: fit-content;
+  margin: 20px 20px;
+  font-weight: 700;
+  height: fit-content;
+}

@@ -8,6 +8,7 @@ import { auth } from "./Firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/userSlice";
 import PayForPlans from "./components/PayForPlans";
+import ShowPage from "./screens/ShowPage";
 require("dotenv").config();
 
 function App() {
@@ -52,8 +53,10 @@ function App() {
             <PayForPlans typeOfPlan="Standard" />
           </Route>
           <Route exact path="/plans/basic">
-            <PayForPlans typeOfPlan=
-            "Basic" />
+            <PayForPlans typeOfPlan="Basic" />
+          </Route>
+          <Route path="/watch">
+           <ShowPage/> 
           </Route>
         </Switch>
       </div>
