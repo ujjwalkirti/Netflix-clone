@@ -63,22 +63,27 @@ function Dashboard() {
                   <h3 className="dashboard__useremail">
                     Hi, {storeUser?.firstName}
                   </h3>
-                  <button
-                    onClick={() => {
-                      setEditDetails(true);
-                    }}
-                    className="dashboard__signout"
-                  >
-                    Edit Details
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSelectPlan(true);
-                    }}
-                    className="dashboard__signout"
-                  >
-                    Chose Plans
-                  </button>
+                  <h3 className="dashboard__plan">
+                    Your plan: {storeUser?.selectedPlan}
+                  </h3>
+                  <div className="dashboard__action">
+                    <button
+                      onClick={() => {
+                        setEditDetails(true);
+                      }}
+                      className="dashboard__signout"
+                    >
+                      Edit Details
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSelectPlan(true);
+                      }}
+                      className="dashboard__signout"
+                    >
+                      Chose Plans
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

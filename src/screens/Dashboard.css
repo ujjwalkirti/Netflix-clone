@@ -12,13 +12,28 @@
   width: fit-content;
   margin: auto;
 }
+.dashboard__useremail {
+  font-weight: 900;
+  
+}
+.dashboard__plan {
+  margin-top: 70px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.dashboard__action {
+  display: flex;
+  /* flex-direction: column; */
+  border: 2px solid gray;
+  padding: 15px;
+  margin-top: 100px;
+}
 .dashboard__signout {
   border: none;
   cursor: pointer;
   background-color: #e50914;
   color: white;
   width: fit-content;
-  margin: 20px auto;
+  margin: 20px 20px;
   font-weight: 700;
   height: fit-content;
 }
