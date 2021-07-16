@@ -4,6 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import Nav from "../components/Nav";
 import { selectUser } from "../features/userSlice";
 import db from "../Firebase";
+import plans from "../components/PlanDetails";
 import userAvatar from "../Static/Avatars/6.png";
 import "./Dashboard.css";
 
@@ -11,9 +12,6 @@ function Dashboard() {
   const user = useSelector(selectUser);
   const [editDetails, setEditDetails] = useState(false);
   const [selectPlan, setSelectPlan] = useState(false);
-  const [priceBasic, setPriceBasic] = useState("7.99");
-  const [priceStandard, setPriceStandard] = useState("9.99");
-  const [pricePremium, setPricePremium] = useState("11.99");
   const [storeUser, setStoreUser] = useState({ firstName: "", lastName: "" });
   const history = useHistory();
 
@@ -62,7 +60,9 @@ function Dashboard() {
                   <img src={userAvatar} alt={user?.email} />
                 </div>
                 <div className="dashboard__right">
-                  <h3 className="dashboard__useremail">Hi, {storeUser?.firstName}</h3>
+                  <h3 className="dashboard__useremail">
+                    Hi, {storeUser?.firstName}
+                  </h3>
                   <button
                     onClick={() => {
                       setEditDetails(true);
@@ -186,9 +186,9 @@ function Dashboard() {
                   <td className="criteria__header">
                     Monthly price after free month ends
                   </td>
-                  <td>$ {pricePremium}</td>
-                  <td>$ {priceStandard}</td>
-                  <td>$ {priceBasic}</td>
+                  {plans.map((plan) => (
+                    <td>{plan.price}</td>
+                  ))}
                 </tr>
                 <tr>
                   <td className="criteria__header">HD available</td>

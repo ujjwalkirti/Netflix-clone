@@ -52,7 +52,8 @@ function App() {
             <PayForPlans typeOfPlan="Standard" />
           </Route>
           <Route exact path="/plans/basic">
-            <PayForPlans typeOfPlan="Basic" />
+            <PayForPlans typeOfPlan=
+            "Basic" />
           </Route>
         </Switch>
       </div>
