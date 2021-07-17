@@ -8,6 +8,7 @@ import "./Row.css";
 function Row({ title, URLparams, isLargeRow }) {
   const user = useSelector(selectUser);
   const [movies, setMovies] = useState([]);
+  const [watch, setWatch] = useState({});
   const [isPaid, setIsPaid] = useState(false);
   const URLbase = "https://api.themoviedb.org/3";
   const URLbaseImage = "https://image.tmdb.org/t/p/original/";
@@ -18,6 +19,7 @@ function Row({ title, URLparams, isLargeRow }) {
         .get()
         .then((doc) => {
           setMovies(doc.data()?.movieList);
+          setWatch(doc.data()?.wantToWatch);
         });
     } else {
       async function fetchData() {
@@ -34,6 +36,31 @@ function Row({ title, URLparams, isLargeRow }) {
   //   .onSnapshot((doc) => {
   //     setMovies(doc.data()?.movieList);
   //   });
+
+  const playNow = (event) => {
+    event.preventDefault();
+    //allow users to play a movie only if they are subscribed to any plan
+    db.collection("users")
+      .doc(user?.uid)
+      .get()
+      .then((doc) => {
+        if (doc.data().selectedPlan !== "None") {
+          db.collection("users")
+            .doc(user?.uid)
+            .update({
+              wantToWatch: watch,
+            })
+            .then(() => {
+              console.log(
+                "You are watching ",
+                watch?.title || watch?.original_name || watch?.name
+              );
+            });
+        } else {
+          alert("You have not subscribed to any plan!");
+        }
+      });
+  };
 
   return (
     <div className="ml-5 genre">
@@ -52,26 +79,7 @@ function Row({ title, URLparams, isLargeRow }) {
                   src={`${URLbaseImage}${
                     isLargeRow ? movie.poster_path : movie.backdrop_path
                   }`}
-                  onClick={() => {
-                    //redirect to dashboard asking him to watch the movie
-                    db.collection("users")
-                      .doc(user?.uid)
-                      .get()
-                      .then((doc) => {
-                        if (doc.data()?.selectedPlan === "None") {
-                          setIsPaid(false);
-                        } else {
-                          setIsPaid(true);
-                        }
-                      });
-                    if (isPaid) {
-                      db.collection("users").doc(user?.uid).update({
-                        wantToWatch: movie,
-                      });
-                    }else{
-                      alert("You have not purchased any plan!")
-                    }
-                  }}
+                  onClick={playNow}
                   alt={movie?.original_title}
                 />
               </>

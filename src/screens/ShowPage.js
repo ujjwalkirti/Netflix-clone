@@ -5,6 +5,7 @@ import searchYoutube from "youtube-api-v3-search";
 import Nav from "../components/Nav";
 import { selectUser } from "../features/userSlice";
 import db from "../Firebase";
+import YouTube from "react-youtube";
 import "./ShowPage.css";
 
 function ShowPage() {

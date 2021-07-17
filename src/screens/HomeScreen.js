@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import Banner from "../components/Banner";
 import requests from "../components/Requests";
 import Row from "../components/Row";
-import ShowPage from "./ShowPage";
 import { selectUser } from "../features/userSlice";
 import db from "../Firebase";
 
@@ -47,7 +46,9 @@ function HomeScreen() {
             URLparams={requests.fetchTrending}
             isLargeRow={true}
           />
-          <Row title="Movies You added" URLparams={null} isLargeRow={false} />
+          {list === [] && (
+            <Row title="Movies You added" URLparams={null} isLargeRow={false} />
+          )}
           <Row
             title="Top Rated"
             URLparams={requests.fetchTopRated}

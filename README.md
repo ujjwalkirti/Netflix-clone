@@ -18,7 +18,8 @@ Select Plan page:
 Plan Payment page:
 ![Screenshot_20210716_103205](https://user-images.githubusercontent.com/64329707/125894425-0a5e9ba1-fad5-4608-a1f3-223788167bb4.png)
 
-For the routing, I have used the 'react-router' node package. Apart from that backend stuffs like authentication and user data management has been implemented using Firebase authentication and Firestore.
+For the routing, I have used the 'react-router' node package. 
+Apart from that backend stuffs like authentication and user data management has been implemented using Firebase authentication and Firestore.
 Furthur, for maintaining the state of user throughout the app I have used Redux.
 
 
