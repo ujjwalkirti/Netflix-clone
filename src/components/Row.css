@@ -21,23 +21,15 @@
 .row__movie {
   margin: 0 10px;
   width: 280px;
+  z-index: 5;
   height: 200px;
 }
 .row__movielarge {
   height: 300px;
-  transition: transform 450ms;
+  transition: transform 350ms;
 }
 .row__movielarge:hover {
   transform: scale(1.08);
   opacity: 1;
 }
-.noDisplay {
-  display: none;
-}
-.textDisplay {
-  display: relative;
-  font-weight: 600;
-}
-.row__moviehover {
-  opacity: 0.5;
-}
+

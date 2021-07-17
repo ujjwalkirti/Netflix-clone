@@ -56,6 +56,15 @@ function Banner() {
       });
   };
 
+  function shortString(str, len){
+    if(str?.length<len){
+      return str;
+    }
+    else {
+      return str?.substring(0,len)+"..."
+    }
+  }
+
   return (
     <div
       style={{
@@ -85,7 +94,7 @@ function Banner() {
               </button>
             </div>
             <div className="banner__description mt-2">
-              <h3>{movie?.overview}</h3>
+              <h3>{shortString(movie?.overview, 150)}</h3>
             </div>
           </div>
         </>

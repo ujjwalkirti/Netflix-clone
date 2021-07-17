@@ -8,7 +8,7 @@ import "./Row.css";
 function Row({ title, URLparams, isLargeRow }) {
   const user = useSelector(selectUser);
   const [movies, setMovies] = useState([]);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(true);
   const URLbase = "https://api.themoviedb.org/3";
   const URLbaseImage = "https://image.tmdb.org/t/p/original/";
   useEffect(() => {
@@ -34,27 +34,19 @@ function Row({ title, URLparams, isLargeRow }) {
   //   .onSnapshot((doc) => {
   //     setMovies(doc.data()?.movieList);
   //   });
-  const hoveringEffects = (event) => {
-    event.preventDefault();
-    if (event.type === "mouseenter") {
-      setIsHovered(true);
-    } else if (event.type === "mouseleave") {
-      setIsHovered(false);
-    }
-  };
+
   return (
     <div className="ml-5 genre">
       <h2 className="genre__heading">{title}</h2>
       <div className="d-flex row__movies">
         {movies.map((movie) => {
           const id = movie.id;
-          let isHovered = false;
+          let isMouseHovered = true;
           if (typeof movie.backdrop_path !== "undefined") {
             return (
               <>
                 <img
-                  className={`row__movie ${isLargeRow && "row__movielarge"} ${
-                    isHovered && "row__moviehover"
+                  className={`row__movie ${isLargeRow && "row__movielarge"}
                   }`}
                   loading="lazy"
                   src={`${URLbaseImage}${
@@ -62,16 +54,12 @@ function Row({ title, URLparams, isLargeRow }) {
                   }`}
                   onClick={() => {
                     //redirect to dashboard asking him to watch the movie
+                    db.collection("users").doc(user?.uid).update({
+                      wantToWatch: movie,
+                    });
                   }}
-                  onMouseEnter={hoveringEffects}
-                  onMouseLeave={hoveringEffects}
                   alt={movie?.original_title}
                 />
-                {isHovered && (
-                  <h3 className="textDisplay">
-                    {movie?.title || movie?.original_name || movie?.name}
-                  </h3>
-                )}
               </>
             );
           }
