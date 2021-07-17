@@ -26,11 +26,10 @@ function ShowPage() {
   useEffect(() => {
     db.collection("users")
       .doc(user?.uid)
-      .get()
-      .then((doc) => {
+      .onSnapshot((doc) => {
         if (doc.data()?.wantToWatch !== null && movie === {}) {
           setMovie(doc.data()?.wantToWatch);
-        } else console.log("Movie is already set!", movie);
+        }
       });
 
     setArr_Search({
@@ -80,7 +79,7 @@ function ShowPage() {
     },
   };
   return (
-    <div>
+    <div className="movie">
       <Nav />
       <div className="movie__heading">
         <h2>{movie?.title || movie?.original_name || movie?.name}</h2>

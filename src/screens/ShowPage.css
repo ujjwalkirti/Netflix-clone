@@ -7,7 +7,16 @@
   margin: 20px 20px;
   font-weight: 700;
   height: fit-content;
+  position: fixed;
+  bottom: 0px;
 }
-.movie__heading{
+.movie__heading {
   color: white;
+}
+.movie__screen {
+  margin: auto;
+  width: fit-content;
+}
+.movie {
+  height: 100vh;
 }
