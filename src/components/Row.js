@@ -8,7 +8,7 @@ import "./Row.css";
 function Row({ title, URLparams, isLargeRow }) {
   const user = useSelector(selectUser);
   const [movies, setMovies] = useState([]);
-  const [isHovered, setIsHovered] = useState(true);
+  const [isPaid, setIsPaid] = useState(false);
   const URLbase = "https://api.themoviedb.org/3";
   const URLbaseImage = "https://image.tmdb.org/t/p/original/";
   useEffect(() => {
@@ -39,7 +39,7 @@ function Row({ title, URLparams, isLargeRow }) {
     <div className="ml-5 genre">
       <h2 className="genre__heading">{title}</h2>
       <div className="d-flex row__movies">
-        {movies.map((movie) => {
+        {movies?.map((movie) => {
           const id = movie.id;
           let isMouseHovered = true;
           if (typeof movie.backdrop_path !== "undefined") {
@@ -54,9 +54,23 @@ function Row({ title, URLparams, isLargeRow }) {
                   }`}
                   onClick={() => {
                     //redirect to dashboard asking him to watch the movie
-                    db.collection("users").doc(user?.uid).update({
-                      wantToWatch: movie,
-                    });
+                    db.collection("users")
+                      .doc(user?.uid)
+                      .get()
+                      .then((doc) => {
+                        if (doc.data()?.selectedPlan === "None") {
+                          setIsPaid(false);
+                        } else {
+                          setIsPaid(true);
+                        }
+                      });
+                    if (isPaid) {
+                      db.collection("users").doc(user?.uid).update({
+                        wantToWatch: movie,
+                      });
+                    }else{
+                      alert("You have not purchased any plan!")
+                    }
                   }}
                   alt={movie?.original_title}
                 />

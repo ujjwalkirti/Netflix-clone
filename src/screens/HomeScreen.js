@@ -25,7 +25,10 @@ function HomeScreen() {
   db.collection("users")
     .doc(user?.uid)
     .onSnapshot((doc) => {
-      if (doc.data()?.wantToWatch !== null) {
+      if (
+        doc.data()?.wantToWatch !== null &&
+        doc.data()?.selectedPlan !== "None"
+      ) {
         setToPlay(true);
       }
     });

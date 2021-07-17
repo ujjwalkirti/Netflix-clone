@@ -55,8 +55,8 @@ function App() {
           <Route exact path="/plans/basic">
             <PayForPlans typeOfPlan="Basic" />
           </Route>
-          <Route path="/watch">
-           <ShowPage/> 
+          <Route exact path="/watch">
+            <ShowPage />
           </Route>
         </Switch>
       </div>
