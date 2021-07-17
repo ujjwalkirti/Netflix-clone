@@ -10,34 +10,34 @@ import "./ShowPage.css";
 
 function ShowPage() {
   const user = useSelector(selectUser);
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState({});
   const [arr_search, setArr_Search] = useState({});
   const [id, setId] = useState("");
   const history = useHistory();
 
-  db.collection("users")
-    .doc(user?.uid)
-    .onSnapshot((doc) => {
-      if (doc.data()?.wantToWatch !== null && movie === []) {
-        setMovie(doc.data()?.wantToWatch);
-      }
-    });
+  // db.collection("users")
+  //   .doc(user?.uid)
+  //   .onSnapshot((doc) => {
+  //     if (doc.data()?.wantToWatch !== null && movie === []) {
+  //       setMovie(doc.data()?.wantToWatch);
+  //     }
+  //   });
 
   useEffect(() => {
-    // db.collection("users")
-    //   .doc(user?.uid)
-    //   .get()
-    //   .then((doc) => {
-    //     if (doc.data()?.wantToWatch !== null && movie === []) {
-    //       setMovie(doc.data()?.wantToWatch);
-    //     } else console.log("Movie is already set!");
-    //   });
+    db.collection("users")
+      .doc(user?.uid)
+      .get()
+      .then((doc) => {
+        if (doc.data()?.wantToWatch !== null && movie === {}) {
+          setMovie(doc.data()?.wantToWatch);
+        } else console.log("Movie is already set!", movie);
+      });
 
     setArr_Search({
       part: "snippet",
       type: "video",
       maxResults: 3,
-      q: movie?.title,
+      q: movie?.title || movie?.original_name || movie?.name,
     });
     function videoSearch(api_key, options) {
       searchYoutube(api_key, options)
@@ -52,7 +52,7 @@ function ShowPage() {
         });
     }
     videoSearch(process.env.REACT_APP_YOUTUBE_API_KEY, arr_search);
-  }, [movie]);
+  }, []);
 
   function goBack(event) {
     event.preventDefault();
@@ -82,6 +82,9 @@ function ShowPage() {
   return (
     <div>
       <Nav />
+      <div className="movie__heading">
+        <h2>{movie?.title || movie?.original_name || movie?.name}</h2>
+      </div>
       <div className="movie__screen">
         <YouTube videId={id} opts={opts} onReady={_onReady} />
       </div>
