@@ -81,7 +81,7 @@ function Banner() {
                 Play
               </button>
               <button className="btn btn-dark" onClick={addToList}>
-                My List
+                Add to List
               </button>
             </div>
             <div className="banner__description mt-2">

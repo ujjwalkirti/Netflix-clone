@@ -1,20 +1,40 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
+import db from "../Firebase";
 import "./Row.css";
 
 function Row({ title, URLparams, isLargeRow }) {
+  const user = useSelector(selectUser);
   const [movies, setMovies] = useState([]);
-  // const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const URLbase = "https://api.themoviedb.org/3";
   const URLbaseImage = "https://image.tmdb.org/t/p/original/";
   useEffect(() => {
-    async function fetchData() {
-      const request = await axios.get(`${URLbase}${URLparams}`);
-      setMovies(request.data.results);
-      return request;
+    if (URLparams === null) {
+      db.collection("users")
+        .doc(user?.uid)
+        .get()
+        .then((doc) => {
+          setMovies(doc.data()?.movieList);
+        });
+    } else {
+      async function fetchData() {
+        const request = await axios.get(`${URLbase}${URLparams}`);
+        setMovies(request.data.results);
+        return request;
+      }
+      fetchData();
     }
-    fetchData();
   }, [URLparams]);
+
+  // db.collection("users")
+  //   .doc(user?.uid)
+  //   .onSnapshot((doc) => {
+  //     setMovies(doc.data()?.movieList);
+  //   });
+
   return (
     <div className="ml-5 genre">
       <h2 className="genre__heading">{title}</h2>
@@ -37,24 +57,24 @@ function Row({ title, URLparams, isLargeRow }) {
                     //redirect to dashboard asking him to watch the movie
                   }}
                   onMouseEnter={() => {
-                    // setIsHovered(true);
-                    isHovered = true;
+                    setIsHovered(true);
+                    // isHovered = true;
+                    console.log("mouse is entered ", isHovered);
 
                     //show the name of the movie and blurr the background a bit
                   }}
                   onMouseLeave={() => {
-                    isHovered = false;
-                    // setIsHovered(false);
+                    // isHovered = false;
+                    setIsHovered(false);
+                    console.log("mouse has left ", isHovered);
                   }}
                   alt={movie?.original_title}
                 />
-                <h3
-                  className={`${!isHovered && "noDisplay"} ${
-                    isHovered && "textDisplay"
-                  }`}
-                >
-                  {movie?.title || movie?.original_name || movie?.name}
-                </h3>
+                {isHovered && (
+                  <h3 className="textDisplay">
+                    {movie?.title || movie?.original_name || movie?.name}
+                  </h3>
+                )}
               </>
             );
           }

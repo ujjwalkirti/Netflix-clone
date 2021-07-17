@@ -11,17 +11,16 @@ import db from "../Firebase";
 function HomeScreen() {
   const user = useSelector(selectUser);
   const [toPlay, setToPlay] = useState(false);
+  const [list, setList] = useState([]);
 
-  // useEffect(() => {
-  //   db.collection("users")
-  //     .doc(user?.uid)
-  //     .get()
-  //     .then((doc) => {
-  //       if (doc.data()?.wantToWatch !== null) {
-  //         setToPlay(true);
-  //       }
-  //     });
-  // }, []);
+  useEffect(() => {
+    db.collection("users")
+      .doc(user?.uid)
+      .get()
+      .then((doc) => {
+        setList(doc.data()?.movieList);
+      });
+  }, []);
 
   db.collection("users")
     .doc(user?.uid)
@@ -45,6 +44,7 @@ function HomeScreen() {
             URLparams={requests.fetchTrending}
             isLargeRow={true}
           />
+          <Row title="Movies You added" URLparams={null} isLargeRow={false} />
           <Row
             title="Top Rated"
             URLparams={requests.fetchTopRated}
