@@ -34,7 +34,14 @@ function Row({ title, URLparams, isLargeRow }) {
   //   .onSnapshot((doc) => {
   //     setMovies(doc.data()?.movieList);
   //   });
-
+  const hoveringEffects = (event) => {
+    event.preventDefault();
+    if (event.type === "mouseenter") {
+      setIsHovered(true);
+    } else if (event.type === "mouseleave") {
+      setIsHovered(false);
+    }
+  };
   return (
     <div className="ml-5 genre">
       <h2 className="genre__heading">{title}</h2>
@@ -56,18 +63,8 @@ function Row({ title, URLparams, isLargeRow }) {
                   onClick={() => {
                     //redirect to dashboard asking him to watch the movie
                   }}
-                  onMouseEnter={() => {
-                    setIsHovered(true);
-                    // isHovered = true;
-                    console.log("mouse is entered ", isHovered);
-
-                    //show the name of the movie and blurr the background a bit
-                  }}
-                  onMouseLeave={() => {
-                    // isHovered = false;
-                    setIsHovered(false);
-                    console.log("mouse has left ", isHovered);
-                  }}
+                  onMouseEnter={hoveringEffects}
+                  onMouseLeave={hoveringEffects}
                   alt={movie?.original_title}
                 />
                 {isHovered && (
