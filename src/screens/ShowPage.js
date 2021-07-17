@@ -36,7 +36,6 @@ function ShowPage() {
     setArr_Search({
       part: "snippet",
       type: "video",
-      
       maxResults: 3,
       q: movie?.title,
     });
@@ -44,6 +43,9 @@ function ShowPage() {
       searchYoutube(api_key, options)
         .then((results) => {
           console.log(results);
+          const n = results.items.length();
+          const uniqueNumber = Math.floor(Math.random() * n);
+          setId(results.items[uniqueNumber].id);
         })
         .catch((err) => {
           console.log(err.error.message);
@@ -64,9 +66,25 @@ function ShowPage() {
       });
   }
 
+  function _onReady(event) {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  }
+
+  const opts = {
+    height: "390",
+    width: "640",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
   return (
     <div>
       <Nav />
+      <div className="movie__screen">
+        <YouTube videId={id} opts={opts} onReady={_onReady} />
+      </div>
       <button className="dashboard__signout" onClick={goBack}>
         Browse more movies
       </button>
