@@ -4,13 +4,14 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import db from "../Firebase";
 import firebase from "firebase";
-
 import "./Banner.css";
 import Nav from "./Nav";
 import requests from "./Requests";
+
 function Banner() {
   const [movie, setMovie] = useState([]);
   const user = useSelector(selectUser);
+  
   useEffect(() => {
     async function fetchMovies() {
       const response = await axios.get(
@@ -46,7 +47,7 @@ function Banner() {
         }
       });
   };
-  
+
   const addToList = (event) => {
     event.preventDefault();
     db.collection("users")
@@ -56,14 +57,14 @@ function Banner() {
       });
   };
 
-  function shortString(str, len){
-    if(str?.length<len){
+  function shortString(str, len) {
+    if (str?.length < len) {
       return str;
-    }
-    else {
-      return str?.substring(0,len)+"..."
+    } else {
+      return str?.substring(0, len) + "...";
     }
   }
+  
 
   return (
     <div
@@ -85,8 +86,12 @@ function Banner() {
                 {movie?.title || movie?.original_name || movie?.name}
               </h1>
             </div>
+            
             <div className="banner__buttons">
-              <button className="btn btn-dark mr-3" onClick={playNow}>
+              <button
+                className="btn btn-dark mr-3"
+                onClick={playNow}
+              >
                 Play
               </button>
               <button className="btn btn-dark" onClick={addToList}>
@@ -94,7 +99,10 @@ function Banner() {
               </button>
             </div>
             <div className="banner__description mt-2">
-              <h3>{shortString(movie?.overview, 150)}</h3>
+              <h3>
+                {movie?.overview !== "undefined" &&
+                  shortString(movie?.overview, 150)}
+              </h3>
             </div>
           </div>
         </>

@@ -62,8 +62,8 @@
   background-image: linear-gradient(
     to bottom,
     rgba(46, 43, 43, 0.31),
-    rgba(46, 43, 43, 0.51),
-    rgba(0, 0, 0, 0.91)
+    rgba(46, 43, 43, 0.81),
+    rgba(0, 0, 0, 1)
   );
   width: 100%;
   height: 50vh;

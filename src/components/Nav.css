@@ -1,8 +1,19 @@
-.navbar {
-  background-color: rgba(255, 255, 255, 0);
-  z-index: 4;
-  height:100px;
-  /* position:absolute; */
+.navbar__native {
+  /* background-color: rgba(255, 255, 255, 0); */
+  z-index: 10;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  display:flex;
+  justify-content:space-between;
+  width: 100%;
+  padding: 10px;
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+}
+.navbar__black {
+  background-color: black;
+  background-image: none;
 }
 .user__avatar {
   height: 60px;
@@ -17,7 +28,7 @@
   font-weight: 700;
   height: fit-content;
 }
-.nav__left{
-    display: flex;
-    align-items: center;
+.nav__left {
+  display: flex;
+  align-items: center;
 }

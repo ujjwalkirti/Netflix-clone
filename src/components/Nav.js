@@ -1,14 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Nav.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 import { auth } from "../Firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
@@ -16,13 +8,26 @@ import userAvatar from "../Static/Avatars/6.png";
 
 function Nav(condition) {
   const user = useSelector(selectUser);
+  const [show, setShow] = useState(false);
   const history = useHistory();
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    });
+    // return () => {
+    //   window.removeEventListener("scroll",null);
+    // };
+  }, []);
   const signout = (event) => {
     event.preventDefault();
     auth
       .signOut()
       .then(() => {
-        history.push('/')
+        history.push("/");
       })
       .catch((err) => {
         alert(err);
@@ -30,8 +35,8 @@ function Nav(condition) {
   };
   return (
     <div>
-      <nav class="navbar">
-        <Link class="navbar-brand" to={user ? `/catalogue` : `/`}>
+      <nav className={`navbar__native ${show && "navbar__black"}`}>
+        <Link className="navbar__brand" to={user ? `/catalogue` : `/`}>
           <img
             src="https://pngimg.com/uploads/netflix/netflix_PNG15.png"
             width="35"

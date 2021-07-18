@@ -49,6 +49,7 @@ function LoginScreen() {
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           selectedPlan: "None",
+          emailVerified: authUser.user.emailVerified
         });
       })
       .catch((error) => {

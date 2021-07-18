@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,10 +9,11 @@ import "./Row.css";
 function Row({ title, URLparams, isLargeRow }) {
   const user = useSelector(selectUser);
   const [movies, setMovies] = useState([]);
-  const [watch, setWatch] = useState({});
-  const [isPaid, setIsPaid] = useState(false);
+  const [movie, setMovie] = useState({});
+  const [showModal, setShowModal] = useState(false);
   const URLbase = "https://api.themoviedb.org/3";
   const URLbaseImage = "https://image.tmdb.org/t/p/original/";
+
   useEffect(() => {
     if (URLparams === null) {
       db.collection("users")
@@ -19,7 +21,6 @@ function Row({ title, URLparams, isLargeRow }) {
         .get()
         .then((doc) => {
           setMovies(doc.data()?.movieList);
-          setWatch(doc.data()?.wantToWatch);
         });
     } else {
       async function fetchData() {
@@ -40,6 +41,7 @@ function Row({ title, URLparams, isLargeRow }) {
   return (
     <div className="ml-5 genre">
       <h2 className="genre__heading">{title}</h2>
+      {showModal && <div className="modal__movie"></div>}
       <div className="d-flex row__movies">
         {movies?.map((movie) => {
           if (typeof movie.backdrop_path !== "undefined") {
@@ -53,28 +55,31 @@ function Row({ title, URLparams, isLargeRow }) {
                     isLargeRow ? movie.poster_path : movie.backdrop_path
                   }`}
                   onClick={() => {
-                    db.collection("users")
-                      .doc(user?.uid)
-                      .get()
-                      .then((doc) => {
-                        if (doc.data().selectedPlan !== "None") {
-                          db.collection("users")
-                            .doc(user?.uid)
-                            .update({
-                              wantToWatch: movie,
-                            })
-                            .then(() => {
-                              console.log(
-                                "You are watching ",
-                                movie?.title ||
-                                  movie?.original_name ||
-                                  movie?.name
-                              );
-                            });
-                        } else {
-                          alert("You have not subscribed to any plan!");
-                        }
-                      });
+                    // db.collection("users")
+                    //   .doc(user?.uid)
+                    //   .get()
+                    //   .then((doc) => {
+                    //     if (doc.data().selectedPlan !== "None") {
+                    //       db.collection("users")
+                    //         .doc(user?.uid)
+                    //         .update({
+                    //           wantToWatch: movie,
+                    //         })
+                    //         .then(() => {
+                    //           console.log(
+                    //             "You are watching ",
+                    //             movie?.title ||
+                    //               movie?.original_name ||
+                    //               movie?.name
+                    //           );
+
+                    //       });
+                    //   } else {
+                    //     alert("You have not subscribed to any plan!");
+                    //   }
+                    // });
+                    setShowModal(true);
+                    setMovie(movie);
                   }}
                   alt={movie?.original_title}
                 />

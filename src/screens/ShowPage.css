@@ -1,4 +1,4 @@
-.dashboard__signout {
+.dashboard__signout1 {
   border: none;
   cursor: pointer;
   background-color: #e50914;
@@ -12,10 +12,13 @@
 }
 .movie__heading {
   color: white;
+  text-align: center;
 }
 .movie__screen {
   margin: auto;
-  width: fit-content;
+  width: 100%;
+  margin-top: 30px;
+
 }
 .movie {
   height: 100vh;

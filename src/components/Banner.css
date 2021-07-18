@@ -25,6 +25,7 @@
   position: absolute;
   z-index: 4;
   padding:5%;
+  margin-top: 50px;
 }
 .transparent h1{
   font-weight: 700;

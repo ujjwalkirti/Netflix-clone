@@ -13,6 +13,7 @@ function Dashboard() {
   const [editDetails, setEditDetails] = useState(false);
   const [selectPlan, setSelectPlan] = useState(false);
   const [storeUser, setStoreUser] = useState({ firstName: "", lastName: "" });
+  const [isEmailVerified, setIsEmailVerified] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -50,6 +51,7 @@ function Dashboard() {
       return (
         <div className="dashboard">
           <Nav />
+          {/* {()} */}
           {!editDetails && !selectPlan && (
             <div className="wrapper">
               <div className="dashboard__heading">
