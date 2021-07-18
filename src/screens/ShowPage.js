@@ -24,20 +24,7 @@ function ShowPage() {
   //   });
 
   useEffect(() => {
-    db.collection("users")
-      .doc(user?.uid)
-      .onSnapshot((doc) => {
-        if (doc.data()?.wantToWatch !== null && movie === {}) {
-          setMovie(doc.data()?.wantToWatch);
-        }
-      });
-
-    setArr_Search({
-      part: "snippet",
-      type: "video",
-      maxResults: 3,
-      q: movie?.title || movie?.original_name || movie?.name,
-    });
+    
     function videoSearch(api_key, options) {
       searchYoutube(api_key, options)
         .then((results) => {
@@ -50,7 +37,22 @@ function ShowPage() {
           console.log(err.error.message);
         });
     }
-    videoSearch(process.env.REACT_APP_YOUTUBE_API_KEY, arr_search);
+    db.collection("users")
+      .doc(user?.uid)
+      .get()
+      .then((doc) => {
+        if (doc.data()?.wantToWatch !== null) {
+          setMovie(doc.data()?.wantToWatch);
+          setArr_Search({
+            part: "snippet",
+            type: "video",
+            maxResults: 3,
+            q: movie?.title || movie?.original_name || movie?.name,
+          });
+          videoSearch(process.env.REACT_APP_YOUTUBE_API_KEY, arr_search);
+        }
+        
+      });
   }, []);
 
   function goBack(event) {
