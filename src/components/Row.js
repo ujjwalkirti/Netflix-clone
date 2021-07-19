@@ -41,7 +41,17 @@ function Row({ title, URLparams, isLargeRow }) {
   return (
     <div className="ml-5 genre">
       <h2 className="genre__heading">{title}</h2>
-      {showModal && <div className="modal__movie"></div>}
+      {showModal && (
+        <div
+          className="modal__movie"
+          style={{
+            backgroundSize: "100% 100%",
+            backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+          }}
+        ><div className="login__gradient"></div></div>
+      )}
       <div className="d-flex row__movies">
         {movies?.map((movie) => {
           if (typeof movie.backdrop_path !== "undefined") {

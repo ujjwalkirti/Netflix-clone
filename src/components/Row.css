@@ -19,18 +19,48 @@
   font-weight: 700;
 }
 .row__movie {
-  margin: 0 10px;
+  margin: 0 5px;
   width: 280px;
   z-index: 5;
+  border-radius: 8px;
   height: 200px;
   cursor: pointer;
-  transition: transform 350ms;
+  transition-timing-function: ease-in;
+  transition: all 350ms;
 }
 .row__movielarge {
   height: 300px;
+  transition-timing-function: ease-in;
   transition: transform 350ms;
 }
-.row__movie:hover {
+.row__movielarge:hover {
   transform: scale(1.08);
+}
+.row__movie:hover {
+  width: 340px;
+  transform: scaleY(1.2);
   opacity: 1;
+}
+.modal__movie {
+  height: 84%;
+  width: 60%;
+  position: fixed;
+  z-index: 11;
+  top: 8%;
+  left: 20%;
+  right: 20%;
+  bottom: 8%;
+  border-radius: 10px;
+}
+.login__gradient {
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgba(37, 37, 37, 0.91),
+    #111
+  );
+  position: fixed;
+  bottom: 0;
+  border-radius: 30px;
+  height: 50%;
 }
