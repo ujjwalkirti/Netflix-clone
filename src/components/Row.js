@@ -13,7 +13,7 @@ function Row({ title, URLparams, isLargeRow }) {
   const [showModal, setShowModal] = useState(false);
   const URLbase = "https://api.themoviedb.org/3";
   const URLbaseImage = "https://image.tmdb.org/t/p/original/";
-
+  let clickedOnModal = false;
   useEffect(() => {
     if (URLparams === null) {
       db.collection("users")
@@ -42,7 +42,7 @@ function Row({ title, URLparams, isLargeRow }) {
     <div
       className="ml-5 genre"
       onClick={() => {
-        if (showModal) {
+        if (showModal && !clickedOnModal) {
           setShowModal(false);
           setFadeAll(false);
         }
@@ -51,14 +51,28 @@ function Row({ title, URLparams, isLargeRow }) {
       {fadeAll && <div className="background__fade"></div>}
       <h2 className="genre__heading">{title}</h2>
       {showModal && (
-        <div className="modal__movie">
+        <div
+          className="modal__movie"
+          onClick={() => {
+            clickedOnModal = true;
+          }}
+        >
+          <button
+            className="modal__button"
+            onClick={() => {
+              setShowModal(false);
+              setFadeAll(false);
+            }}
+          >
+            X
+          </button>
           <img
             className="modal__movieBanner"
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
           />
           <div className="modal__gradient"></div>
           <div className="modal__description">
-            <h1>{movie?.title}</h1>
+            <h1>{movie?.title || movie?.original_name || movie?.name}</h1>
             <h4>{movie?.overview}</h4>
           </div>
         </div>

@@ -55,7 +55,7 @@
   background-color: #111;
   transition: all 250ms;
   overflow-y: scroll;
-  overflow-x:hidden;
+  overflow-x: hidden;
   scrollbar-width: none;
   transition-timing-function: ease-in;
 }
@@ -66,12 +66,28 @@
   z-index: 12;
   /* object-fit: contain; */
 }
+.modal__button {
+  border: 1px solid white;
+  border-radius: 50%;
+  position: fixed;
+  top: 6%;
+  right: 21%;
+  background-color: black;
+  color: white;
+  z-index: 14;
+}
 .modal__description {
-  padding:20px;
+  padding: 20px;
   width: 100%;
   border-radius: 10px;
   height: fit-content;
   z-index: 14;
+}
+.modal__description h1 {
+  font-weight: 800;
+}
+.modal__description h4 {
+  font-weight: 600;
 }
 .modal__gradient {
   background-image: linear-gradient(
