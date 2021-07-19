@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,6 +9,7 @@ function Row({ title, URLparams, isLargeRow }) {
   const user = useSelector(selectUser);
   const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState({});
+  const [fadeAll, setFadeAll] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const URLbase = "https://api.themoviedb.org/3";
   const URLbaseImage = "https://image.tmdb.org/t/p/original/";
@@ -39,28 +39,38 @@ function Row({ title, URLparams, isLargeRow }) {
   //   });
 
   return (
-    <div className="ml-5 genre">
+    <div
+      className="ml-5 genre"
+      onClick={() => {
+        if (showModal) {
+          setShowModal(false);
+          setFadeAll(false);
+        }
+      }}
+    >
+      {fadeAll && <div className="background__fade"></div>}
       <h2 className="genre__heading">{title}</h2>
       {showModal && (
-        <div
-          className="modal__movie"
-          style={{
-            backgroundSize: "100% 100%",
-            backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
-            backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="login__gradient"></div></div>
+        <div className="modal__movie">
+          <img
+            className="modal__movieBanner"
+            src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+          />
+          <div className="modal__gradient"></div>
+          <div className="modal__description">
+            <h1>{movie?.title}</h1>
+            <h4>{movie?.overview}</h4>
+          </div>
+        </div>
       )}
+
       <div className="d-flex row__movies">
         {movies?.map((movie) => {
           if (typeof movie.backdrop_path !== "undefined") {
             return (
               <>
                 <img
-                  className={`row__movie ${isLargeRow && "row__movielarge"}
-                  }`}
+                  className={`row__movie ${isLargeRow && `row__movielarge`}`}
                   loading="lazy"
                   src={`${URLbaseImage}${
                     isLargeRow ? movie.poster_path : movie.backdrop_path
@@ -91,6 +101,7 @@ function Row({ title, URLparams, isLargeRow }) {
                     // });
                     setShowModal(true);
                     setMovie(movie);
+                    setFadeAll(true);
                   }}
                   alt={movie?.original_title}
                 />

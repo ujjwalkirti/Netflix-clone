@@ -42,25 +42,59 @@
   opacity: 1;
 }
 .modal__movie {
-  height: 84%;
+  /* height: 100%; */
   width: 60%;
   position: fixed;
-  z-index: 11;
-  top: 8%;
+  z-index: 13;
+  top: 5%;
   left: 20%;
   right: 20%;
   bottom: 8%;
   border-radius: 10px;
+  border: 2px solid red;
+  background-color: #111;
+  transition: all 250ms;
+  overflow-y: scroll;
+  overflow-x:hidden;
+  scrollbar-width: none;
+  transition-timing-function: ease-in;
 }
-.login__gradient {
+.modal__movieBanner {
+  width: 100%;
+  height: 600px;
+  border-radius: inherit;
+  z-index: 12;
+  /* object-fit: contain; */
+}
+.modal__description {
+  padding:20px;
+  width: 100%;
+  border-radius: 10px;
+  height: fit-content;
+  z-index: 14;
+}
+.modal__gradient {
   background-image: linear-gradient(
-    180deg,
+    to bottom,
     transparent,
-    rgba(37, 37, 37, 0.91),
+    rgba(37, 37, 37, 0.21),
     #111
   );
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 600px;
+  z-index: 13;
+}
+
+.background__fade {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 1000px;
+  width: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
   bottom: 0;
-  border-radius: 30px;
-  height: 50%;
+  right: 0;
+  z-index: 12;
 }
