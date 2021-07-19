@@ -50,7 +50,8 @@ function Row({ title, URLparams, isLargeRow }) {
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
           }}
-        ><div className="login__gradient"></div></div>
+        >
+          <div className="login__gradient"></div></div>
       )}
       <div className="d-flex row__movies">
         {movies?.map((movie) => {

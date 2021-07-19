@@ -31,7 +31,7 @@
 .row__movielarge {
   height: 300px;
   transition-timing-function: ease-in;
-  transition: transform 350ms;
+  transition: all 350ms;
 }
 .row__movielarge:hover {
   transform: scale(1.08);
