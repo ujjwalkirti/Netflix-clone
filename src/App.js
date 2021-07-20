@@ -13,12 +13,14 @@ require("dotenv").config();
 
 function App() {
   const user = useSelector(selectUser);
+  let tempUser = {};
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = () => {
       auth.onAuthStateChanged(function (authUser) {
         if (authUser) {
           console.log(authUser);
+          tempUser = authUser;
           dispatch(
             login({
               uid: authUser.uid,
@@ -44,7 +46,7 @@ function App() {
             <HomeScreen />
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard />
+            <Dashboard EmailVerified={tempUser.emailVerified} />
           </Route>
           <Route exact path="/plans/premium">
             <PayForPlans typeOfPlan="Premium" />

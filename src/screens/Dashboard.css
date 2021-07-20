@@ -1,11 +1,71 @@
 .dashboard {
   color: white;
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: black;
+  /* margin-top: 50px; */
 }
+
 .dashboard__heading h2 {
   text-align: center;
   font-weight: 900;
+}
+.dashboard__alert {
+  margin: 75px auto;
+  background-color: #e50914;
+  color: white;
+  width: fit-content;
+  padding: 15px;
+}
+.dashboard__myList {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  z-index: 2;
+}
+.dashboard__myList::-webkit-scrollbar {
+  display: none;
+}
+.dashboard__listMovie {
+  margin: 0 5px;
+}
+.dashboard__userRelated {
+  margin: 0 5px;
+}
+.dashboard__userRelated h2 {
+  font-weight: 700;
+}
+.dashboard__listposter{
+  object-fit: contain;
+  height: 200px;
+  width: 300px;
+  position: relative;
+  border-radius: 15px;
+}
+.dashboard__listButtons {
+  display: flex;
+}
+.dashboard__listButtons button {
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+  border-radius: 50%;
+  
+  border: none;
+}
+.dashboard__listPlay {
+  background-color: #e50914;
+  position: absolute;
+  /* bottom: 0;
+  left: 0; */
+  z-index: 3;
+}
+.dashboard__alert h2 {
+  text-align: center;
 }
 .dashboard__heading {
   border-bottom: 2px solid gray;
@@ -14,7 +74,6 @@
 }
 .dashboard__useremail {
   font-weight: 900;
-  
 }
 .dashboard__plan {
   margin-top: 70px;
@@ -39,7 +98,6 @@
 }
 .dashboard__center {
   display: flex;
-
   width: fit-content;
   margin: auto;
 }
@@ -92,9 +150,6 @@ td {
   width: 200px;
   text-align: center;
   vertical-align: middle;
-}
-.wrapper__plan {
-  /* height: 100%; */
 }
 
 tr {

@@ -56,8 +56,12 @@
   transition: all 250ms;
   overflow-y: scroll;
   overflow-x: hidden;
-  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   transition-timing-function: ease-in;
+}
+.modal__movie::-webkit-scrollbar {
+  display: none;
 }
 .modal__movieBanner {
   width: 100%;

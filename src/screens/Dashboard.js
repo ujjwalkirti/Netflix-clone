@@ -7,11 +7,13 @@ import db from "../Firebase";
 import plans from "../components/PlanDetails";
 import userAvatar from "../Static/Avatars/6.png";
 import "./Dashboard.css";
+import Row from "../components/Row";
 
-function Dashboard() {
+function Dashboard({ emailVerified }) {
   const user = useSelector(selectUser);
   const [editDetails, setEditDetails] = useState(false);
   const [selectPlan, setSelectPlan] = useState(false);
+  const [moviesList, setMoviesList] = useState([]);
   const [storeUser, setStoreUser] = useState({ firstName: "", lastName: "" });
   const [isEmailVerified, setIsEmailVerified] = useState(true);
   const history = useHistory();
@@ -23,7 +25,14 @@ function Dashboard() {
         .get()
         .then((doc) => {
           if (doc.exists) {
+            console.log(doc.data());
             setStoreUser(doc.data());
+            if (emailVerified) {
+              setIsEmailVerified(true);
+            } else {
+              setIsEmailVerified(false);
+            }
+            setMoviesList(doc.data().movieList);
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -51,9 +60,14 @@ function Dashboard() {
       return (
         <div className="dashboard">
           <Nav />
-          {/* {()} */}
+
           {!editDetails && !selectPlan && (
             <div className="wrapper">
+              {!isEmailVerified && (
+                <div className="dashboard__alert">
+                  <h2>Email address is not verified yet!</h2>
+                </div>
+              )}
               <div className="dashboard__heading">
                 <h2>Edit Profile</h2>
               </div>
@@ -87,6 +101,9 @@ function Dashboard() {
                     </button>
                   </div>
                 </div>
+              </div>
+              <div className="dashboard__userRelated">
+                <Row title="Your List" URLparams={null} isLargeRow={false} />
               </div>
             </div>
           )}

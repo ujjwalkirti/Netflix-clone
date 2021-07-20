@@ -29,8 +29,9 @@ function Row({ title, URLparams, isLargeRow }) {
         return request;
       }
       fetchData();
+      console.log(movies);
     }
-  }, [URLparams]);
+  }, [URLparams,user]);
 
   // db.collection("users")
   //   .doc(user?.uid)
