@@ -11,7 +11,7 @@ import requests from "./Requests";
 function Banner() {
   const [movie, setMovie] = useState([]);
   const user = useSelector(selectUser);
-  
+
   useEffect(() => {
     async function fetchMovies() {
       const response = await axios.get(
@@ -64,7 +64,6 @@ function Banner() {
       return str?.substring(0, len) + "...";
     }
   }
-  
 
   return (
     <div
@@ -81,17 +80,14 @@ function Banner() {
       {movie ? (
         <>
           <div className="transparent">
-            <div className="banner__title">
+            <div className="banner__title" style={{marginTop:"150px"}}>
               <h1 className="display-3">
                 {movie?.title || movie?.original_name || movie?.name}
               </h1>
             </div>
-            
+
             <div className="banner__buttons">
-              <button
-                className="btn btn-dark mr-3"
-                onClick={playNow}
-              >
+              <button className="btn btn-dark mr-3" onClick={playNow}>
                 Play
               </button>
               <button className="btn btn-dark" onClick={addToList}>
@@ -107,7 +103,11 @@ function Banner() {
           </div>
         </>
       ) : (
-        <div class="spinner-border text-primary" role="status">
+        <div
+          class="spinner-border text-primary"
+          style={{ position: "fixed", top: "200px", textAlign: "center" }}
+          role="status"
+        >
           <span class="sr-only">Loading...</span>
         </div>
       )}

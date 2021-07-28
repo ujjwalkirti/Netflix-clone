@@ -57,7 +57,7 @@ function PayForPlans({ typeOfPlan }) {
   return (
     <div className="payment">
       <Nav />
-      <span className="payment__wrapper">
+      <div className="payment__wrapper">
         <div className="payment__plandescription">
           <h2 className="payment__planname">{tempPlan?.name}</h2>
         </div>
@@ -67,8 +67,8 @@ function PayForPlans({ typeOfPlan }) {
             onApprove={(data, actions) => onApprove(data, actions)}
           />
         </div>
-      </span>
-      <img className="footer__image" src={footerImage} alt="" />
+      </div>
+      
     </div>
   );
 }

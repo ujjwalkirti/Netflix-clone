@@ -29,9 +29,8 @@ function Row({ title, URLparams, isLargeRow }) {
         return request;
       }
       fetchData();
-      console.log(movies);
     }
-  }, [URLparams,user]);
+  }, [URLparams, user]);
 
   // db.collection("users")
   //   .doc(user?.uid)
@@ -59,7 +58,7 @@ function Row({ title, URLparams, isLargeRow }) {
           }}
         >
           <button
-            className="modal__button"
+            className="modal__buttonClose"
             onClick={() => {
               setShowModal(false);
               setFadeAll(false);
@@ -73,8 +72,18 @@ function Row({ title, URLparams, isLargeRow }) {
           />
           <div className="modal__gradient"></div>
           <div className="modal__description">
+            <button className="modal__buttonPlay">Play</button>
+            <button className="modal__buttonAdd">+</button>
             <h1>{movie?.title || movie?.original_name || movie?.name}</h1>
             <h4>{movie?.overview}</h4>
+            <ul>
+              <li>
+                <h5>Votes: {movie?.vote_count}</h5>
+              </li>
+              <li>
+                <h5>Released on: {movie?.release_date || movie?.first_air_date}</h5>
+              </li>
+            </ul>
           </div>
         </div>
       )}

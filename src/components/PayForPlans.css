@@ -1,29 +1,37 @@
+.payment {
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-color: black;
+  top: 0;
+}
 .payment__wrapper {
-  width: 80%;
-  height: 100%;
+  width: 400px;
+  border: 1px solid gray;
   margin: auto;
   color: white;
   display: flex;
-  margin-top: 20px;
+  flex-direction: column;
+  margin-top: 200px;
+  align-items: center;
   /* justify-content: center; */
 }
 .payment__plandescription h2 {
   font-weight: 700;
-  border: 1px solid gray;
-  width:fit-content;
-  padding:10px;
-  margin-bottom: 50px;
+  text-decoration: underline;
+  width: fit-content;
+  padding: 10px;
+  text-align: center;
+  /* margin-top: 200px; */
+  margin-bottom: 25px;
 }
-.payment__plandescription {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-}
+
 .payment__checkout {
   padding: 20px;
   height: fit-content;
 }
-.footer__image{
-  width:60%;
-  margin:auto;
+.footer__image {
+  width: 100%;
+  margin: auto;
+  object-fit: contain;
 }

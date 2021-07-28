@@ -60,7 +60,6 @@ function Dashboard({ emailVerified }) {
       return (
         <div className="dashboard">
           <Nav />
-
           {!editDetails && !selectPlan && (
             <div className="wrapper">
               {!isEmailVerified && (
@@ -91,14 +90,25 @@ function Dashboard({ emailVerified }) {
                     >
                       Edit Details
                     </button>
-                    <button
-                      onClick={() => {
-                        setSelectPlan(true);
-                      }}
-                      className="dashboard__signout"
-                    >
-                      Chose Plans
-                    </button>
+                    {storeUser?.selectedPlan ? (
+                      <button
+                        onClick={() => {
+                          setSelectPlan(true);
+                        }}
+                        className="dashboard__signout"
+                      >
+                        Switch Plans
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setSelectPlan(true);
+                        }}
+                        className="dashboard__signout"
+                      >
+                        Chose Plans
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

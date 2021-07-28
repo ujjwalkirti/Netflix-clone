@@ -70,7 +70,7 @@
   z-index: 12;
   /* object-fit: contain; */
 }
-.modal__button {
+.modal__buttonClose {
   border: 1px solid white;
   border-radius: 50%;
   position: fixed;
@@ -79,6 +79,18 @@
   background-color: black;
   color: white;
   z-index: 14;
+}
+.modal__buttonPlay {
+  background-color: #e50914;
+  border: none;
+  margin: 0 10px;
+  color: white;
+}
+.modal__buttonAdd {
+  background-color: gray;
+  color: transparent;
+  border: none;
+  margin: 0 10px;
 }
 .modal__description {
   padding: 20px;

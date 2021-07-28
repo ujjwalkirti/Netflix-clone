@@ -1,9 +1,10 @@
 .dashboard {
   color: white;
+  position: fixed;
+  top: 0;
   height: 100%;
   width: 100%;
-  position: absolute;
-  top: 0;
+
   background-color: black;
   /* margin-top: 50px; */
 }
@@ -13,7 +14,7 @@
   font-weight: 900;
 }
 .dashboard__alert {
-  margin: 75px auto;
+  margin: 0px auto;
   background-color: #e50914;
   color: white;
   width: fit-content;
@@ -39,7 +40,7 @@
 .dashboard__userRelated h2 {
   font-weight: 700;
 }
-.dashboard__listposter{
+.dashboard__listposter {
   object-fit: contain;
   height: 200px;
   width: 300px;
@@ -54,7 +55,7 @@
   width: 50px;
   margin: 10px;
   border-radius: 50%;
-  
+
   border: none;
 }
 .dashboard__listPlay {
