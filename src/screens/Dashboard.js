@@ -14,7 +14,7 @@ function Dashboard({ emailVerified }) {
   const [editDetails, setEditDetails] = useState(false);
   const [selectPlan, setSelectPlan] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
-  const [storeUser, setStoreUser] = useState({ firstName: "", lastName: "" });
+  const [storeUser, setStoreUser] = useState({ firstName: "", lastName: "",phoneNumber:"",address: "",});
   const [isEmailVerified, setIsEmailVerified] = useState(true);
   const history = useHistory();
 
@@ -27,7 +27,7 @@ function Dashboard({ emailVerified }) {
           if (doc.exists) {
             console.log(doc.data());
             setStoreUser(doc.data());
-            if (emailVerified) {
+            if (doc.data()?.emailVerified) {
               setIsEmailVerified(true);
             } else {
               setIsEmailVerified(false);
@@ -61,10 +61,11 @@ function Dashboard({ emailVerified }) {
         <div className="dashboard">
           <Nav />
           {!editDetails && !selectPlan && (
-            <div className="wrapper">
+            <div className="dashboard__wrapper">
               {!isEmailVerified && (
                 <div className="dashboard__alert">
-                  <h2>Email address is not verified yet!</h2>
+                  <h4>Email address is not verified yet!</h4>
+                  <button className="dashboard__alertButton">X</button>
                 </div>
               )}
               <div className="dashboard__heading">
@@ -72,44 +73,42 @@ function Dashboard({ emailVerified }) {
               </div>
               <div className="dashboard__center">
                 <div className="dashboard__left">
-                  <img src={userAvatar} alt={user?.email} />
-                </div>
-                <div className="dashboard__right">
                   <h3 className="dashboard__useremail">
                     Hi, {storeUser?.firstName}
                   </h3>
+                  <button
+                    onClick={() => {
+                      setEditDetails(true);
+                    }}
+                    className="dashboard__signout"
+                  >
+                    Edit Details
+                  </button>
+                </div>
+                <div className="dashboard__right">
                   <h3 className="dashboard__plan">
                     Your plan: {storeUser?.selectedPlan}
                   </h3>
-                  <div className="dashboard__action">
+
+                  {storeUser?.selectedPlan ? (
                     <button
                       onClick={() => {
-                        setEditDetails(true);
+                        setSelectPlan(true);
                       }}
                       className="dashboard__signout"
                     >
-                      Edit Details
+                      Switch Plans
                     </button>
-                    {storeUser?.selectedPlan ? (
-                      <button
-                        onClick={() => {
-                          setSelectPlan(true);
-                        }}
-                        className="dashboard__signout"
-                      >
-                        Switch Plans
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setSelectPlan(true);
-                        }}
-                        className="dashboard__signout"
-                      >
-                        Chose Plans
-                      </button>
-                    )}
-                  </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setSelectPlan(true);
+                      }}
+                      className="dashboard__signout"
+                    >
+                      Chose Plans
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="dashboard__userRelated">
@@ -184,7 +183,7 @@ function Dashboard({ emailVerified }) {
           )}
           {!editDetails && selectPlan && (
             <div className="wrapper__plan">
-              <h2>Choose the plan that's right for you!</h2>
+              <h2>Chose the plan that's right for you!</h2>
               <h4>Downgrade or upgrade at any time.</h4>
               <table className="plan__table">
                 <tr>
